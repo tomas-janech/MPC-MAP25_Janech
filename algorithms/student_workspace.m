@@ -1,9 +1,26 @@
 function [public_vars] = student_workspace(read_only_vars,public_vars)
 %STUDENT_WORKSPACE Summary of this function goes here
 
+% probabilities
+cycles = 300;
+
+if read_only_vars.counter < cycles + 1
+    public_vars.lidar_history(read_only_vars.counter, :) = read_only_vars.lidar_distances;
+end
+
+if read_only_vars.counter == cycles+1
+    std_GNSS = std(read_only_vars.gnss_history)
+
+    std_LIDAR = std(public_vars.lidar_history)
+
+end
+
+
 % 8. Perform initialization procedure
 if (read_only_vars.counter == 1)
-          
+    
+    public_vars.lidar_history = zeros(cycles,8);
+
     public_vars = init_particle_filter(read_only_vars, public_vars);
     public_vars = init_kalman_filter(read_only_vars, public_vars);
 

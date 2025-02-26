@@ -1,0 +1,3 @@
+start_position = [2.5, 5, pi/2]; % (x, y, theta)
+
+map_name = 'maps/testmap2.txt';
